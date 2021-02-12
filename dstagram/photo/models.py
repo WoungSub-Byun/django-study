@@ -10,7 +10,7 @@ class Photo(models.Model):
     photo = models.ImageField(
         upload_to="photos/%Y/%m/%d", default="photos/no_image.png"
     )
-    text = models.TextField
+    text = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
