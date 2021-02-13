@@ -16,6 +16,26 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+MEDIA_URL = "/media/"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+LOGIN_REDIRECT_URL = "/"
+
+DISQUS_WEBSITE_SHORTNAME = "dstagram-django-example"
+SITE_ID = 1
+
+AWS_ACCESS_KEY_ID = "AKIA2DAL3UVV3KJO5JNM"
+AWS_SECRET_ACCESS_KEY = "tvKok4TrLiuJPbcX89UyoRF7WY2mcbnKZGyDHkUZ"
+AWS_REGION = "ap-northeast-1"
+AWS_STORAGE_BUCKET_NAME = "dstagram-example"
+AWS_S3_CUSTOM_DOMAIN = "%s.s3.%s.amazonaws.com" % (AWS_STORAGE_BUCKET_NAME, AWS_REGION)
+AWS_S3_OBJECT_PARAMETERS = {
+    "CacheControl": "max-age=86400",
+}
+DEFAULT_FILE_STORAGE = "config.asset_storage.MediaStorage"
+
+DATABASES["default"].update(dj_database_url.config(conn_max_age=500))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -126,25 +146,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
-
-
-MEDIA_URL = "/media/"
-
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-
-LOGIN_REDIRECT_URL = "/"
-
-DISQUS_WEBSITE_SHORTNAME = "dstagram-django-example"
-SITE_ID = 1
-
-AWS_ACCESS_KEY_ID = "AKIA2DAL3UVV3KJO5JNM"
-AWS_SECRET_ACCESS_KEY = "tvKok4TrLiuJPbcX89UyoRF7WY2mcbnKZGyDHkUZ"
-AWS_REGION = "ap-northeast-1"
-AWS_STORAGE_BUCKET_NAME = "dstagram-example"
-AWS_S3_CUSTOM_DOMAIN = "%s.s3.%s.amazonaws.com" % (AWS_STORAGE_BUCKET_NAME, AWS_REGION)
-AWS_S3_OBJECT_PARAMETERS = {
-    "CacheControl": "max-age=86400",
-}
-DEFAULT_FILE_STORAGE = "config.asset_storage.MediaStorage"
-
-DATABASES["default"].update(dj_database_url.config(conn_max_age=500))
