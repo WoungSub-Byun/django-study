@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "photo",
     "accounts",
+    "disqus",
+    "django.contrib.sites",
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -127,3 +130,16 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 LOGIN_REDIRECT_URL = "/"
+
+DISQUS_WEBSITE_SHORTNAME = "dstagram-django-example"
+SITE_ID = 1
+
+AWS_ACCESS_KEY_ID = "AKIA2DAL3UVV3KJO5JNM"
+AWS_SECRET_ACCESS_KEY = "tvKok4TrLiuJPbcX89UyoRF7WY2mcbnKZGyDHkUZ"
+AWS_REGION = "ap-northeast-1"
+AWS_STORAGE_BUCKET_NAME = "dstagram-example"
+AWS_S3_CUSTOM_DOMAIN = "%s.s3.%s.amazonaws.com" % (AWS_STORAGE_BUCKET_NAME, AWS_REGION)
+AWS_S3_OBJECT_PARAMETERS = {
+    "CacheControl": "max-age=86400",
+}
+DEFAULT_FILE_STORAGE = "config.asset_storage.MediaStorage"
