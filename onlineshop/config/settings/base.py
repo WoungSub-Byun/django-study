@@ -15,9 +15,7 @@ from pathlib import Path
 # ===== 경로 설정 ======
 import os
 
-_BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-BASE_DIR = os.path.dirname(_BASE)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ROOT_DIR = os.path.dirname(BASE_DIR)
 # ==========================
@@ -28,6 +26,8 @@ CONFIG_SECRET_FILE = os.path.join(CONFIG_SECRET_DIR, "settings_develop.json")
 # =================================
 
 # ======= SECRET FILE json으로 가져오기 ========
+import json
+
 if os.path.isfile(CONFIG_SECRET_FILE):
     # 로컬 환경 또는 배포 환경
     config_secret_file = json.loads(open(CONFIG_SECRET_FILE).read())
