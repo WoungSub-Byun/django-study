@@ -12,15 +12,29 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+# ===== 경로 설정 ======
+import os
 
+_BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+BASE_DIR = os.path.dirname(_BASE)
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "u@_u(4jvx074@krw^o(jf30xh*b%qv!-8fzr07$s=ba%)h2t0t"
+ROOT_DIR = os.path.dirname(BASE_DIR)
+# ==========================
+
+# ===== SECRET FILE 경로 설정 =====
+CONFIG_SECRET_DIR = os.path.join(ROOT_DIR, ".config_secret")
+CONFIG_SECRET_FILE = os.path.join(CONFIG_SECRET_DIR, "settings_develop.json")
+# =================================
+
+# ======= SECRET FILE json으로 가져오기 ========
+if os.path.isfile(CONFIG_SECRET_FILE):
+    # 로컬 환경 또는 배포 환경
+    config_secret_file = json.loads(open(CONFIG_SECRET_FILE).read())
+else:
+    # 테스팅 환경 (환경변수로 지정해야댐)
+    config_secret_file = json.loads(os.environ["SECRET_SETTING"])
+# ======================================
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -73,13 +87,6 @@ WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
 
 
 # Password validation

@@ -154,3 +154,6 @@ dmypy.json
 
 # vscode
 .vscode
+
+# credential files
+.config_secret
