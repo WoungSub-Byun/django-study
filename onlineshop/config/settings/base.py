@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "pymysql",
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -126,3 +127,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = "/static/"
+
+AWS_ACCESS_KEY_ID = config_secret_file["aws"]["AWS_ACCESS_KEY_ID"]
+AWS_SECRET_ACCESS_KEY = config_secret_file["aws"]["AWS_SECRET_ACCESS_KEY"]
+AWS_REGION = config_secret_file["aws"]["AWS_REGION"]
+AWS_STORAGE_BUCKET_NAME = config_secret_file["aws"]["AWS_STORAGE_BUCKET_NAME"]
+AWS_S3_CUSTOM_DOMAIN = config_secret_file["aws"]["AWS_S3_CUSTOM_DOMAIN"]
+AWS_S3_OBJECT_PARAMETERS = config_secret_file["aws"]["AWS_S3_OBJECT_PARAMETERS"]
+AWS_DEFAULT_ACL = config_secret_file["aws"]["AWS_DEFAULT_ACL"]
+AWS_LOCATION = config_secret_file["aws"]["AWS_LOCATION"]
+
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"

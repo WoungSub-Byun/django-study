@@ -19,7 +19,6 @@ JWT_AUTH = {
     "JWT_ALGORITHM": config_secret_file["jwt"]["algorithm"],
 }
 # ========================
-
 ALLOWED_HOSTS = ["*"]
 
 DATABASES = config_secret_file["django"]["database"]  # DB 설정
