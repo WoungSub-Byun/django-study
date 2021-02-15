@@ -18,3 +18,19 @@ def get_token():
         return access_res["response"]["access_token"]
     else:
         return None
+
+
+# 2. 결제 정보 전달
+def payments_prepare(order_id, amount, *args, **kwargs):
+    access_token = get_token()
+    if access_token:
+        access_data = {"merchant_uid": order_id, "amount": amount}
+        url = "https://api.iamport.kr/payments/prepare"
+        headers = {"Authorization": access_token}
+        req = requests.post(url, data=access_data, headers=headers)
+        res = req.json()
+
+        if res["code"] is not 0:
+            raise ValueError("API 통신 오류")
+    else:
+        raise ValueError("Token Error")
