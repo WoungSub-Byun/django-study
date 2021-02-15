@@ -56,8 +56,8 @@ INSTALLED_APPS = [
     "shop",
     "allauth",
     "allauth.account",  # 가입한 게정 관리
-    "aullauth.socialaccount",  # 소셜계정으로 가입한 게정 관리
-    "allauth.socialaccount.providers.namer",  # 네이버를 사용한 소셜로그인
+    "allauth.socialaccount",  # 소셜계정으로 가입한 게정 관리
+    "allauth.socialaccount.providers.naver",  # 네이버를 사용한 소셜로그인
 ]
 
 MIDDLEWARE = [
