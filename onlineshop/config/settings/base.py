@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount.providers.naver",  # 네이버를 사용한 소셜로그인
     "shop",
     "cart",
+    "coupon",
 ]
 
 MIDDLEWARE = [
