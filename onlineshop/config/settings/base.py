@@ -51,9 +51,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "pymysql",
+    "django.contrib.sites",  # 사이트 정보 설정
     "storages",
     "shop",
+    "allauth",
+    "allauth.account",  # 가입한 게정 관리
+    "aullauth.socialaccount",  # 소셜계정으로 가입한 게정 관리
+    "allauth.socialaccount.providers.namer",  # 네이버를 사용한 소셜로그인
 ]
 
 MIDDLEWARE = [
