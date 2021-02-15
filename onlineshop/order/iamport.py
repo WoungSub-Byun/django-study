@@ -34,3 +34,29 @@ def payments_prepare(order_id, amount, *args, **kwargs):
             raise ValueError("API 통신 오류")
     else:
         raise ValueError("Token Error")
+
+
+# 3. 결제 완료 및 확인
+def find_transaction(order_id, *args, **kwargs):
+    access_token = get_token()
+    if access_token:
+        url = "https://api.iamport.kr/payments/find/" + order_id
+        headers = {"Authorization": access_token}
+        req = requests.post(url, headers=headers)
+        res = req.json()
+
+        if res["code"] is 0:
+            res = res["response"]
+            context = {
+                "imp_id": res["imp_uid"],
+                "merchant_order_id": res["merchant_uid"],
+                "amount": res["amount"],
+                "status": res["status"],
+                "type": res["pay_method"],
+                "receipt_url": res["receipt_url"],
+            }
+            return context
+        else:
+            return None
+    else:
+        raise ValueError("Token Error")
