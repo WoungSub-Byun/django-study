@@ -155,5 +155,8 @@ dmypy.json
 # vscode
 .vscode
 
+# pycharm
+.idea
+
 # credential files
 .config_secret
