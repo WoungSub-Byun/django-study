@@ -164,3 +164,6 @@ CART_ID = "cart_in_session"
 # IAMPORT 설정
 IAMPORT_KEY = config_secret_file["iamport"]["IAMPORT_KEY"]
 IAMPORT_SECRET = config_secret_file["iamport"]["IAMPORT_SECRET"]
+
+# static files dir
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
