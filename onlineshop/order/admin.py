@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 
+from .models import OrderItem, Order
+
 
 def export_to_csv(modeladmin, request, queryset):
     opts = modeladmin.model._meta
@@ -53,3 +55,31 @@ def order_pdf(obj):
 
 
 order_pdf.short_description = "PDF"
+
+
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    raw_id_fields = ["product"]
+
+
+class OrderAdmin(admin.ModelAdmin):
+    list_display = [
+        "id",
+        "first_name",
+        "list_name",
+        "email",
+        "address",
+        "postal_code",
+        "city",
+        "paid",
+        "order_detail",
+        "order_pdf",
+        "created",
+        "updated",
+    ]
+    list_filter = ["paid", "created", "updated"]
+    inlines = [OrderItemInline]
+    actions = [export_to_csv]
+
+
+admin.site.register(Order, OrderAdmin)
