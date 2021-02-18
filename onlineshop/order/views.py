@@ -38,6 +38,7 @@ def order_complete(request):
     order = Order.objects.get(id=order_id)
     return render(request, "order/created.html", {"order": order})
 
+
 class OrderCreateAjaxView(View):
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -51,38 +52,41 @@ class OrderCreateAjaxView(View):
                 order.discount = cart.coupon.amount
             order = form.save()
             for item in cart:
-                OrderItem.objects.create(order=order, product=item['product'], price=item['price'], quantity=item['quantity'])
+                OrderItem.objects.create(
+                    order=order,
+                    product=item["product"],
+                    price=item["price"],
+                    quantity=item["quantity"],
+                )
             cart.clear()
-            data = {
-                "order_id": order.id
-            }
+            data = {"order_id": order.id}
             return JsonResponse(data)
         else:
             return JsonResponse({}, status=401)
+
 
 class OrderCheckoutAjaxView(View):
     def post(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             return JsonResponse({"authenticated": False}, status=403)
+
         order_id = request.POST.get("order_id")
         order = Order.objects.get(id=order_id)
         amount = request.POST.get("amount")
+
         try:
             merchant_order_id = OrderTransaction.objects.create_new(
-                order=order,
-                amount=amount
+                order=order, amount=amount
             )
         except:
             merchant_order_id = None
 
         if merchant_order_id is not None:
-            data = {
-                "works": True,
-                "merchant_id": merchant_order_id
-            }
-            return JsonResponse(merchant_order_id)
+            data = {"works": True, "merchant_id": merchant_order_id}
+            return JsonResponse(data)
         else:
             return JsonResponse({}, status=401)
+
 
 class OrderImpAjaxView(View):
     def post(self, request, *args, **kwargs):
@@ -90,14 +94,12 @@ class OrderImpAjaxView(View):
             return JsonResponse({"authenticated": False}, status=401)
         order_id = request.POST.get("order_id")
         order = Order.objects.get(id=order_id)
-        merchant_id = request.POST.get('merchant_id')
-        imp_id = request.POST.get('imp_id')
-        amount = request.POST.get('amount')
+        merchant_id = request.POST.get("merchant_id")
+        imp_id = request.POST.get("imp_id")
+        amount = request.POST.get("amount")
         try:
             trans = OrderTransaction.objects.get(
-                order = order,
-                merchant_order_id=merchant_id,
-                amount=amount
+                order=order, merchant_order_id=merchant_id, amount=amount
             )
         except:
             trans = None
@@ -107,9 +109,7 @@ class OrderImpAjaxView(View):
             trans.save()
             order.paid = True
             order.save()
-            data = {
-                "works": True
-            }
+            data = {"works": True}
             return JsonResponse(data)
         else:
             return JsonResponse({}, status=401)

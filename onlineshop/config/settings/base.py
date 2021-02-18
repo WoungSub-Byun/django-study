@@ -155,6 +155,9 @@ AWS_LOCATION = config_secret_file["aws"]["AWS_LOCATION"]
 
 STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
 STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+# static files dir
+STATICFILES_DIRS = [os.path.join(ROOT_DIR, "static")]
+
 
 DEFAULT_FILE_STORAGE = "config.asset_storage.MediaStorage"
 
@@ -164,6 +167,3 @@ CART_ID = "cart_in_session"
 # IAMPORT 설정
 IAMPORT_KEY = config_secret_file["iamport"]["IAMPORT_KEY"]
 IAMPORT_SECRET = config_secret_file["iamport"]["IAMPORT_SECRET"]
-
-# static files dir
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
