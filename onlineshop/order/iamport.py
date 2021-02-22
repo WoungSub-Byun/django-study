@@ -14,7 +14,7 @@ def get_token():
     req = requests.post(url, data=access_data)
     access_res = req.json()
 
-    if access_res["code"] is 0:
+    if access_res["code"] == 0:
         return access_res["response"]["access_token"]
     else:
         return None
@@ -30,7 +30,7 @@ def payments_prepare(order_id, amount, *args, **kwargs):
         req = requests.post(url, data=access_data, headers=headers)
         res = req.json()
 
-        if res["code"] is not 0:
+        if res["code"] != 0:
             raise ValueError("API 통신 오류")
     else:
         raise ValueError("Token Error")
@@ -45,7 +45,7 @@ def find_transaction(order_id, *args, **kwargs):
         req = requests.post(url, headers=headers)
         res = req.json()
 
-        if res["code"] is 0:
+        if res["code"] == 0:
             res = res["response"]
             context = {
                 "imp_id": res["imp_uid"],
