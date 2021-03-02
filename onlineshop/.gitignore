@@ -160,3 +160,5 @@ dmypy.json
 
 # credential files
 .config_secret
+
+*.pem
