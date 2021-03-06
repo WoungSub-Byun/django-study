@@ -124,7 +124,7 @@ STATIC_URL = "/static/"
 
 
 # twilio secret
-SMS_ACCESS_KEY_ID = config_secret_file["twilio"]["SMS_ACCESS_KEY_ID"]
-SMS_ACCESS_SECRET_KEY = config_secret_file["twilio"]["SMS_ACCESS_SECRET_KEY"]
-SMS_SEND_PHONE_NUMBER = config_secret_file["twilio"]["SMS_SEND_PHONE_NUMBER"]
-TEST_PHONENUM = config_secret_file["twilio"]["TEST_PHONENUM"]
+SMS_ACCESS_KEY = config_secret_file["ncp"]["x-ncp-iam-access-key"]
+SMS_API_SIGNATURE = config_secret_file["ncp"]["x-ncp-apigw-signature-v2"]
+SMS_SEND_PHONE_NUMBER = config_secret_file["ncp"]["x-ncp-send-from"]
+TEST_PHONENUM = config_secret_file["ncp"]["TEST_PHONENUM"]
