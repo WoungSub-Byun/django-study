@@ -123,8 +123,12 @@ USE_TZ = True
 STATIC_URL = "/static/"
 
 
-# twilio secret
-SMS_ACCESS_KEY = config_secret_file["ncp"]["x-ncp-iam-access-key"]
-SMS_API_SIGNATURE = config_secret_file["ncp"]["x-ncp-apigw-signature-v2"]
+# ncloud secret
+API_ACCESS_KEY = config_secret_file["ncp"]["x-ncp-iam-access-key"]
+API_SECRET_KEY = config_secret_file["ncp"]["x-ncp-secret-key"]
 SMS_SEND_PHONE_NUMBER = config_secret_file["ncp"]["x-ncp-send-from"]
+SMS_SERVICE_ID = config_secret_file["ncp"]["x-ncp-service-id"]
 TEST_PHONENUM = config_secret_file["ncp"]["TEST_PHONENUM"]
+API_URL = "https://sens.apigw.ntruss.com/sms/v2/services/{}/messages".format(
+    SMS_SERVICE_ID
+)
