@@ -8,3 +8,12 @@ class SmsAuth(models.Model):
 
     class Meta:
         db_table = "SMSAUTH"
+
+    def is_expired(self, auth_code):
+        now = datetime.now()
+        obj = SmsAuth.objects.get(auth_code=auth_code)
+        if (
+            now - obj.created_at
+        ).seconds > 180:  # datetime연산은 timedelta 값으로 반환, 인증만료시간 3분
+            return True
+        return False
