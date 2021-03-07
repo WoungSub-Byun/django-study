@@ -17,3 +17,7 @@
 - get_object_or_404를 사용한 get메소드 구현
 - models.Manager 상속 받아 order모델 매니저 구현
 - djsngo admin 사이트를 통해 csv파일 추출
+
+> smstest
+- Navercloud의 `Simple & Easy Notification Service` 사용하여 sms인증 구현
+- `smsauth`모델 메서드로 구현
